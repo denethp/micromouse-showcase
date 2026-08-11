@@ -36,7 +36,7 @@ The project has evolved through several generations, with each version introduci
 ## Chia v1 — First Generation
 
 <p align="center">
-  <img src="images/chia_v1.png" width="380" alt="Chia v1 assembled robot">
+  <img src="gallery/chia%20v1.jpeg" width="380" alt="Chia v1 assembled robot">
 </p>
 
 The first-generation Micromouse platform was developed around a **Teensy 4.1** microcontroller.
@@ -58,8 +58,8 @@ Chia v1 established the initial hardware and software architecture for the Micro
 ## Chia v2 — Second Generation
 
 <p align="center">
-  <img src="images/chia_v2.png" width="380" alt="Chia v2 assembled robot">
-  <img src="images/chia_v2_early_build.png" width="300" alt="Chia v2 early bare-board build">
+  <img src="gallery/chia%20v2.jpeg" width="380" alt="Chia v2 assembled robot">
+  <img src="gallery/IMG_3780.png" width="300" alt="Chia v2 early bare-board build">
 </p>
 
 Chia v2 introduced a more compact and integrated electronics platform while improving the mechanical and electrical design.
@@ -78,7 +78,7 @@ Chia v2 introduced a more compact and integrated electronics platform while impr
 ### PCB
 
 <p align="center">
-  <img src="images/chia_v1_pcb.png" width="380" alt="Chia PCB layout">
+  <img src="gallery/chia%20v1%20%28pcb%29.jpeg" width="380" alt="Chia PCB layout">
 </p>
 
 The Chia v2 PCB integrates the microcontroller interface, motor drivers, sensor interfaces, and power-management circuitry into a compact electronics platform.
@@ -88,7 +88,7 @@ The Chia v2 PCB integrates the microcontroller interface, motor drivers, sensor 
 ## Blaze v1 — Third Generation
 
 <p align="center">
-  <img src="images/blaze_v1_pcb.png" width="380" alt="Blaze v1 PCB layout">
+  <img src="gallery/blaze%20v1%20%28pcb%29.jpg" width="380" alt="Blaze v1 PCB layout">
 </p>
 
 Blaze v1 is the third-generation Micromouse platform, developed with a stronger focus on high-speed autonomous navigation and optimized motion control.
@@ -280,26 +280,26 @@ The system is continuously being improved toward faster exploration, more accura
 ## Blaze v1 — Third Generation
 
 <p align="center">
-  <img src="images/blaze_v1_pcb.png" width="420" alt="Blaze v1 PCB">
+  <img src="gallery/blaze%20v1%20%28pcb%29.jpg" width="420" alt="Blaze v1 PCB">
 </p>
 
 ## Chia v2 — Second Generation
 
 <p align="center">
-  <img src="images/chia_v2.png" width="320" alt="Chia v2">
-  <img src="images/chia_v2_early_build.png" width="320" alt="Chia v2 early build">
+  <img src="gallery/chia%20v2.jpeg" width="320" alt="Chia v2">
+  <img src="gallery/IMG_3780.png" width="320" alt="Chia v2 early build">
 </p>
 
 ## Chia v2 PCB
 
 <p align="center">
-  <img src="images/chia_v1_pcb.png" width="420" alt="Chia v2 PCB">
+  <img src="gallery/chia%20v1%20%28pcb%29.jpeg" width="420" alt="Chia v2 PCB">
 </p>
 
 ## Chia v1 — First Generation
 
 <p align="center">
-  <img src="images/chia_v1.png" width="420" alt="Chia v1">
+  <img src="gallery/chia%20v1.jpeg" width="420" alt="Chia v1">
 </p>
 
 ---
@@ -308,12 +308,12 @@ The system is continuously being improved toward faster exploration, more accura
 
 ```text
 .
-├── images/
-│   ├── blaze_v1_pcb.png
-│   ├── chia_v1.png
-│   ├── chia_v1_pcb.png
-│   ├── chia_v2.png
-│   └── chia_v2_early_build.png
+├── gallery/
+│   ├── blaze v1 (pcb).jpg
+│   ├── chia v1 (pcb).jpeg
+│   ├── chia v1.jpeg
+│   ├── chia v2.jpeg
+│   └── IMG_3780.png
 │
 ├── Chia_v1/
 │   ├── Firmware/

@@ -1,5 +1,3 @@
-# micromouse-showcase
-
 # Micromouse — Autonomous Maze Solving Robots
 
 An ongoing Micromouse robotics project focused on developing high-speed autonomous maze-solving robots, from custom electronics and mechanical design to embedded firmware, motion control, state estimation, and path planning.
@@ -37,6 +35,10 @@ The project has evolved through several generations, with each version introduci
 
 ## Chia v1 — First Generation
 
+<p align="center">
+  <img src="images/chia_v1.png" width="380" alt="Chia v1 assembled robot">
+</p>
+
 The first-generation Micromouse platform was developed around a **Teensy 4.1** microcontroller.
 
 ### Key Features
@@ -55,6 +57,11 @@ Chia v1 established the initial hardware and software architecture for the Micro
 
 ## Chia v2 — Second Generation
 
+<p align="center">
+  <img src="images/chia_v2.png" width="380" alt="Chia v2 assembled robot">
+  <img src="images/chia_v2_early_build.png" width="300" alt="Chia v2 early bare-board build">
+</p>
+
 Chia v2 introduced a more compact and integrated electronics platform while improving the mechanical and electrical design.
 
 ### Key Features
@@ -70,11 +77,19 @@ Chia v2 introduced a more compact and integrated electronics platform while impr
 
 ### PCB
 
+<p align="center">
+  <img src="images/chia_v1_pcb.png" width="380" alt="Chia PCB layout">
+</p>
+
 The Chia v2 PCB integrates the microcontroller interface, motor drivers, sensor interfaces, and power-management circuitry into a compact electronics platform.
 
 ---
 
 ## Blaze v1 — Third Generation
+
+<p align="center">
+  <img src="images/blaze_v1_pcb.png" width="380" alt="Blaze v1 PCB layout">
+</p>
 
 Blaze v1 is the third-generation Micromouse platform, developed with a stronger focus on high-speed autonomous navigation and optimized motion control.
 
@@ -92,9 +107,16 @@ Blaze v1 is the third-generation Micromouse platform, developed with a stronger 
 
 The platform is designed for competitive Micromouse applications, with emphasis on smooth, accurate, and high-speed movement through the maze.
 
-### PCB
+### Controller, at a glance
 
-The Blaze v1 electronics were designed as a custom 4-layer PCB to provide a compact and integrated hardware platform for the robot.
+Blaze v1's motion controller runs a closed-loop feedback/feedforward scheme on both the
+forward and rotational axes, tracking smooth (non-abrupt) speed profiles rather than
+stepping directly to a target velocity. Wheel encoders provide the primary velocity
+feedback; an onboard IMU is fused in to improve heading accuracy, and wall-sensor
+readings contribute a steering correction to keep the robot centered while traveling
+through the maze. No further implementation detail is shared publicly at this stage.
+
+### PCB
 
 > Due to project confidentiality before competitions, only selected PCB design details are publicly shared.
 
@@ -199,19 +221,28 @@ The system is continuously being improved toward faster exploration, more accura
 
 ## Blaze v1 — Third Generation
 
-![Blaze v1 PCB](...)
+<p align="center">
+  <img src="images/blaze_v1_pcb.png" width="420" alt="Blaze v1 PCB">
+</p>
 
 ## Chia v2 — Second Generation
 
-![Chia v2](...)
+<p align="center">
+  <img src="images/chia_v2.png" width="320" alt="Chia v2">
+  <img src="images/chia_v2_early_build.png" width="320" alt="Chia v2 early build">
+</p>
 
 ## Chia v2 PCB
 
-![Chia v2 PCB](...)
+<p align="center">
+  <img src="images/chia_v1_pcb.png" width="420" alt="Chia v2 PCB">
+</p>
 
 ## Chia v1 — First Generation
 
-![Chia v1](...)
+<p align="center">
+  <img src="images/chia_v1.png" width="420" alt="Chia v1">
+</p>
 
 ---
 
@@ -219,6 +250,13 @@ The system is continuously being improved toward faster exploration, more accura
 
 ```text
 .
+├── images/
+│   ├── blaze_v1_pcb.png
+│   ├── chia_v1.png
+│   ├── chia_v1_pcb.png
+│   ├── chia_v2.png
+│   └── chia_v2_early_build.png
+│
 ├── Chia_v1/
 │   ├── Firmware/
 │   ├── Hardware/
@@ -237,3 +275,4 @@ The system is continuously being improved toward faster exploration, more accura
 │   └── Documentation/
 │
 └── README.md
+```

@@ -288,12 +288,6 @@ The system is continuously being improved toward faster exploration, more accura
   <img src="Gallery/chia%20v2.jpeg" width="320" alt="Chia v2">
 </p>
 
-## Chia v2 PCB
-
-<p align="center">
-  <img src="Gallery/chia%20v1%20%28pcb%29.jpeg" width="420" alt="Chia v2 PCB">
-</p>
-
 ## Chia v1 — First Generation
 
 <p align="center">

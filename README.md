@@ -117,69 +117,47 @@ readings contribute a steering correction to keep the robot centered while trave
 through the maze. No further implementation detail is shared publicly at this stage.
 
 ```mermaid
-%%{init: {'flowchart': {'curve': 'linear'}}}%%
-flowchart LR
-    subgraph SENSE_EST["Sensing &amp; State Estimation"]
-        ENC_L["Left Wheel Encoder<br/><sub>measures left motor output</sub>"]
-        ENC_R["Right Wheel Encoder<br/><sub>measures right motor output</sub>"]
-        IMU["IMU (Gyro)"]
-        WALL["Wall Sensors (IR)"]
-        FWD["Forward Estimate<br/>Sensor Fusion"]
-        ROT["Rotation Estimate<br/>Sensor Fusion"]
-        STEER["Wall-Following<br/>steering correction"]
-    end
+flowchart TD
+    SYSID["MATLAB System Identification"] --> LMODEL["Left Wheel Model"]
+    SYSID --> RMODEL["Right Wheel Model"]
 
-    subgraph PLANNING["Motion Planning &amp; Modeling"]
-        MP["Motion Profile Generator"]
-        MIX["Wheel Target Mixing"]
-        LTARGET["Left Wheel Target"]
-        RTARGET["Right Wheel Target"]
-        SYSID["MATLAB System Identification"]
-        LMODEL["Left Wheel Model"]
-        RMODEL["Right Wheel Model"]
-    end
+    MP["Motion Profile Generator"] --> MIX["Wheel Target Mixing"]
+    FWD["Forward Estimate<br/>Sensor Fusion"] --> MIX
+    ROT["Rotation Estimate<br/>Sensor Fusion"] --> MIX
 
-    subgraph CONTROL_ACT["Control &amp; Actuation"]
-        FF["Feedforward Controller"]
-        FB["Feedback Controller"]
-        SUM(("+"))
-        MOTOR_L["Left Motor"]
-        MOTOR_R["Right Motor"]
-    end
+    MIX --> LTARGET["Left Wheel Target"]
+    MIX --> RTARGET["Right Wheel Target"]
 
-    DIST["Friction &amp; Sharp IR<br/>Disturbance Model<br/>(under construction)"]
-
-    ENC_L --> FWD
-    ENC_R --> FWD
-    ENC_L --> ROT
-    ENC_R --> ROT
-    IMU --> ROT
-    WALL --> STEER
-
-    MP --> MIX
-    FWD --> MIX
-    ROT --> MIX
-    MIX --> LTARGET
-    MIX --> RTARGET
-
-    SYSID --> LMODEL
-    SYSID --> RMODEL
     LTARGET --> LMODEL
     RTARGET --> RMODEL
 
-    WALL -.-> DIST
-    DIST -.-> FF
-
-    LMODEL --> FF
+    LMODEL --> FF["Feedforward Controller"]
     RMODEL --> FF
-    LTARGET --> FB
+
+    LTARGET --> FB["Feedback Controller"]
     RTARGET --> FB
+
+    ENC_L["Left Wheel Encoder"] --> FWD
+    ENC_R["Right Wheel Encoder"] --> FWD
+
+    ENC_L --> ROT
+    ENC_R --> ROT
+    IMU["IMU (Gyro)"] --> ROT
+
+    WALL["Wall Sensors (IR)"] --> STEER["Wall-Following<br/>steering correction"]
     STEER --> FB
 
-    FF --> SUM
+    WALL -.-> DIST["Friction &amp; Sharp IR<br/>Disturbance Model<br/>(under construction)"]
+    DIST -.-> FF
+
+    FF --> SUM(("+"))
     FB --> SUM
-    SUM --> MOTOR_L
-    SUM --> MOTOR_R
+
+    SUM --> MOTOR_L["Left Motor"]
+    SUM --> MOTOR_R["Right Motor"]
+
+    MOTOR_L -.-> ENC_L
+    MOTOR_R -.-> ENC_R
 
     classDef model fill:#f5eefc,stroke:#7a3fa0,stroke-width:2px,color:#1a1a1a;
     classDef sensor fill:#fff4e6,stroke:#c97a1a,stroke-width:2px,color:#1a1a1a;
@@ -194,13 +172,7 @@ flowchart LR
     class FF,FB,SUM controller;
     class MOTOR_L,MOTOR_R motor;
     class DIST wip;
-
-    style SENSE_EST fill:#ffffff,stroke:#cccccc,stroke-width:1px;
-    style PLANNING fill:#ffffff,stroke:#cccccc,stroke-width:1px;
-    style CONTROL_ACT fill:#ffffff,stroke:#cccccc,stroke-width:1px;
 ```
-
-*Closed-loop note: each wheel's motor output is measured every control tick by its own encoder (Left Motor ↔ Left Wheel Encoder, Right Motor ↔ Right Wheel Encoder), closing the loop back into state estimation — shown here as a label rather than a long return arrow, for readability.*
 
 ### PCB
 
@@ -222,4 +194,143 @@ Flood-fill is used to calculate distances to the goal and determine efficient pa
 
 ### Motion Profiling
 
-Motion profiles are used to control acceleration, constant-speed motion,
+Motion profiles are used to control acceleration, constant-speed motion, and deceleration instead of applying abrupt velocity commands.
+
+### PID Motor Control
+
+Closed-loop motor control uses encoder feedback to regulate wheel velocity.
+
+The control system incorporates both:
+
+- Feedback control
+- Feedforward control
+
+This allows the robot to achieve faster and more accurate velocity tracking.
+
+### State Estimation
+
+Sensor measurements are combined using a **Kalman filter** to improve estimates of the robot's motion state.
+
+### System Identification
+
+MATLAB-based modelling and experimental measurements are used to characterize motor behaviour and tune the motion-control system.
+
+---
+
+# 🔧 Hardware
+
+| Generation | Microcontroller | PCB | Motor |
+|------------|-----------------|-----|-------|
+| Chia v1 | Teensy 4.1 | Custom electronics | DC motors |
+| Chia v2 | Teensy 4.1 | Custom 2-layer PCB | 1000 RPM DC motors |
+| Blaze v1 | STM32 | Custom 4-layer PCB | High-speed DC motors |
+
+---
+
+# 🛠️ Technologies
+
+### Embedded Systems
+- C
+- C++
+- STM32
+- Teensy 4.1
+- Embedded firmware
+- Encoder interfaces
+- Motor control
+
+### Robotics & Control
+- PID control
+- Feedforward control
+- Motion profiling
+- State estimation
+- Kalman filtering
+- Differential-drive kinematics
+
+### Navigation
+- Maze mapping
+- Flood-fill path planning
+- Autonomous exploration
+- Optimal path planning
+
+### Electronics & Design
+- Altium Designer
+- Custom PCB design
+- Motor drivers
+- Sensor interfaces
+- Power management
+
+### Modelling & Tuning
+- MATLAB
+- System identification
+- Experimental characterization
+- Controller tuning
+
+---
+
+# 🏆 Competition
+
+The Micromouse platform has been developed for autonomous robotics competitions, including **Micromaze 2.0 at IIT**, where the team was selected among the **Top 10 finalists**.
+
+The system is continuously being improved toward faster exploration, more accurate motion control, and optimized maze-solving performance.
+
+---
+
+# 📸 Project Gallery
+
+## Blaze v1 — Third Generation
+
+<p align="center">
+  <img src="images/blaze_v1_pcb.png" width="420" alt="Blaze v1 PCB">
+</p>
+
+## Chia v2 — Second Generation
+
+<p align="center">
+  <img src="images/chia_v2.png" width="320" alt="Chia v2">
+  <img src="images/chia_v2_early_build.png" width="320" alt="Chia v2 early build">
+</p>
+
+## Chia v2 PCB
+
+<p align="center">
+  <img src="images/chia_v1_pcb.png" width="420" alt="Chia v2 PCB">
+</p>
+
+## Chia v1 — First Generation
+
+<p align="center">
+  <img src="images/chia_v1.png" width="420" alt="Chia v1">
+</p>
+
+---
+
+# 📁 Repository Structure
+
+```text
+.
+├── images/
+│   ├── blaze_v1_pcb.png
+│   ├── chia_v1.png
+│   ├── chia_v1_pcb.png
+│   ├── chia_v2.png
+│   └── chia_v2_early_build.png
+│
+├── Chia_v1/
+│   ├── Firmware/
+│   ├── Hardware/
+│   └── Documentation/
+│
+├── Chia_v2/
+│   ├── Firmware/
+│   ├── PCB/
+│   ├── CAD/
+│   └── Documentation/
+│
+├── Blaze_v1/
+│   ├── Firmware/
+│   ├── PCB/
+│   ├── CAD/
+│   └── Documentation/
+│
+└── README.md
+```

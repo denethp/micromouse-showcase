@@ -59,7 +59,6 @@ Chia v1 established the initial hardware and software architecture for the Micro
 
 <p align="center">
   <img src="Gallery/chia%20v2.jpeg" width="380" alt="Chia v2 assembled robot">
-  <img src="Gallery/IMG_3780.png" width="300" alt="Chia v2 early bare-board build">
 </p>
 
 Chia v2 introduced a more compact and integrated electronics platform while improving the mechanical and electrical design.
@@ -287,7 +286,6 @@ The system is continuously being improved toward faster exploration, more accura
 
 <p align="center">
   <img src="Gallery/chia%20v2.jpeg" width="320" alt="Chia v2">
-  <img src="Gallery/IMG_3780.png" width="320" alt="Chia v2 early build">
 </p>
 
 ## Chia v2 PCB
@@ -301,36 +299,3 @@ The system is continuously being improved toward faster exploration, more accura
 <p align="center">
   <img src="Gallery/chia%20v1.jpeg" width="420" alt="Chia v1">
 </p>
-
----
-
-# 📁 Repository Structure
-
-```text
-.
-├── Gallery/
-│   ├── blaze v1 (pcb).jpg
-│   ├── chia v1 (pcb).jpeg
-│   ├── chia v1.jpeg
-│   ├── chia v2.jpeg
-│   └── IMG_3780.png
-│
-├── Chia_v1/
-│   ├── Firmware/
-│   ├── Hardware/
-│   └── Documentation/
-│
-├── Chia_v2/
-│   ├── Firmware/
-│   ├── PCB/
-│   ├── CAD/
-│   └── Documentation/
-│
-├── Blaze_v1/
-│   ├── Firmware/
-│   ├── PCB/
-│   ├── CAD/
-│   └── Documentation/
-│
-└── README.md
-```
